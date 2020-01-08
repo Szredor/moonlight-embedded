@@ -339,7 +339,8 @@ int main(int argc, char* argv[]) {
     char pin[5];
     char buffer[10];
     
-    /* KSM mod - don't randomize a pin, just get it from text file */
+    /* KSM mod - don't randomize a pin, just get it from text file 
+		else it sends pin 1234 */
     FILE* f = fopen("recent-code.txt", "r");
     if (f != NULL)
     {

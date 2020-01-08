@@ -5,7 +5,7 @@ client software to play (greatly using https://github.com/irtimmer/moonlight-emb
 
 # WARNING ! WORK IN PROGRESS
 It works mostly(or not), but if you want to configure it by yourself,
-you really should create an issue. I and others will help.
+you really should deeply read wiki with linked sources.
 
 # Server, client and slave
 
