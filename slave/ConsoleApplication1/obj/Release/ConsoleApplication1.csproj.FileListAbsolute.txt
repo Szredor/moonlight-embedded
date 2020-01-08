@@ -1,0 +1,21 @@
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\MoonlightSlave.exe.config
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\MoonlightSlave.exe
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\MoonlightSlave.pdb
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\Razorvine.Pyrolite.dll
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\Razorvine.Serpent.dll
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\WindowsInput.dll
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\bin\Release\WindowsInput.xml
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\obj\Release\MoonlightSlave.exe
+C:\Users\user\documents\visual studio 2015\Projects\ConsoleApplication1\ConsoleApplication1\obj\Release\MoonlightSlave.pdb
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\MoonlightSlave.exe.config
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\MoonlightSlave.exe
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\MoonlightSlave.pdb
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\Razorvine.Pyrolite.dll
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\Razorvine.Serpent.dll
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\WindowsInput.dll
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\bin\Release\WindowsInput.xml
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\obj\Release\ConsoleApplication1.csproj.CoreCompileInputs.cache
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\obj\Release\ConsoleApplication1.csproj.CopyComplete
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\obj\Release\MoonlightSlave.exe
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\obj\Release\MoonlightSlave.pdb
+Z:\Projekty\Moonlight_Multisession\MoonlightServer\slave\ConsoleApplication1\obj\Release\ConsoleApplication1.csprojAssemblyReference.cache

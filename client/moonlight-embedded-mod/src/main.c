@@ -128,11 +128,9 @@ static void stream(PSERVER_DATA server, PCONFIGURATION config, enum platform sys
   LiStartConnection(&server->serverInfo, &config->stream, &connection_callbacks, platform_get_video(system), platform_get_audio(system, config->audio_device), NULL, drFlags, config->audio_device, 0);
 
   if (IS_EMBEDDED(system)) {
-    if (!config->viewonly)
-      evdev_start();
+    evdev_start();
     loop_main();
-    if (!config->viewonly)
-      evdev_stop();
+    evdev_stop();
   }
   #ifdef HAVE_SDL
   else if (system == SDL)
@@ -151,11 +149,7 @@ static void stream(PSERVER_DATA server, PCONFIGURATION config, enum platform sys
 }
 
 static void help() {
-  #ifdef GIT_BRANCH
-  printf("Moonlight Embedded %d.%d.%d-%s-%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, GIT_BRANCH, GIT_COMMIT_HASH);
-  #else
   printf("Moonlight Embedded %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-  #endif
   printf("Usage: moonlight [action] (options) [host]\n");
   printf("       moonlight [configfile]\n");
   printf("\n Actions\n\n");
@@ -184,14 +178,13 @@ static void help() {
   printf("\t-remote\t\t\tEnable remote optimizations\n");
   printf("\t-app <app>\t\tName of app to stream\n");
   printf("\t-nosops\t\t\tDon't allow GFE to modify game settings\n");
-  printf("\t-localaudio\t\tPlay audio locally on the host computer\n");
+  printf("\t-localaudio\t\tPlay audio locally\n");
   printf("\t-surround\t\tStream 5.1 surround sound (requires GFE 2.7)\n");
   printf("\t-keydir <directory>\tLoad encryption keys from directory\n");
   printf("\t-mapping <file>\t\tUse <file> as gamepad mappings configuration file\n");
   printf("\t-platform <system>\tSpecify system used for audio, video and input: pi/imx/aml/rk/x11/x11_vdpau/sdl/fake (default auto)\n");
   printf("\t-unsupported\t\tTry streaming if GFE version or options are unsupported\n");
   printf("\t-quitappafter\t\tSend quit app request to remote after quitting session\n");
-  printf("\t-viewonly\t\tDisable all input processing (view-only mode)\n");
   #if defined(HAVE_SDL) || defined(HAVE_X11)
   printf("\n WM options (SDL and X11 only)\n\n");
   printf("\t-windowed\t\tDisplay screen in a window\n");
@@ -218,19 +211,19 @@ int main(int argc, char* argv[]) {
 
   if (config.action == NULL || strcmp("help", config.action) == 0)
     help();
-
+  
   if (config.debug_level > 0)
     printf("Moonlight Embedded %d.%d.%d (%s)\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, COMPILE_OPTIONS);
 
-  if (strcmp("map", config.action) == 0) {
+  if (strcmp("map", config.action) == 0) { 
     if (config.inputsCount != 1) {
       printf("You need to specify one input device using -input.\n");
       exit(-1);
     }
-
+ 
     evdev_create(config.inputs[0], NULL, config.debug_level > 0);
-    evdev_map(config.inputs[0]);
-    exit(0);
+    evdev_map(config.inputs[0]); 
+    exit(0); 
   }
 
   if (config.address == NULL) {
@@ -247,7 +240,7 @@ int main(int argc, char* argv[]) {
       exit(-1);
     }
   }
-
+  
   char host_config_file[128];
   sprintf(host_config_file, "hosts/%s.conf", config.address);
   if (access(host_config_file, R_OK) != -1)
@@ -280,7 +273,9 @@ int main(int argc, char* argv[]) {
   if (strcmp("list", config.action) == 0) {
     pair_check(&server);
     applist(&server);
-  } else if (strcmp("stream", config.action) == 0) {
+  } 
+    else if (strcmp("stream", config.action) == 0) 
+  {
     pair_check(&server);
     enum platform system = platform_check(config.platform);
     if (config.debug_level > 0)
@@ -295,64 +290,74 @@ int main(int argc, char* argv[]) {
     }
     config.stream.supportsHevc = config.codec != CODEC_H264 && (config.codec == CODEC_HEVC || platform_supports_hevc(system));
 
-    #ifdef HAVE_SDL
-    if (system == SDL)
-      sdl_init(config.stream.width, config.stream.height, config.fullscreen);
-    #endif
-
-    if (config.viewonly) {
-      if (config.debug_level > 0)
-        printf("View-only mode enabled, no input will be sent to the host computer\n");
-    } else {
-      if (IS_EMBEDDED(system)) {
-        char* mapping_env = getenv("SDL_GAMECONTROLLERCONFIG");
-        if (config.mapping == NULL && mapping_env == NULL) {
-          fprintf(stderr, "Please specify mapping file as default mapping could not be found.\n");
-          exit(-1);
-        }
-
-        struct mapping* mappings = NULL;
-        if (config.mapping != NULL)
-          mappings = mapping_load(config.mapping, config.debug_level > 0);
-
-        if (mapping_env != NULL) {
-          struct mapping* map = mapping_parse(mapping_env);
-          map->next = mappings;
-          mappings = map;
-        }
-
-        for (int i=0;i<config.inputsCount;i++) {
-          if (config.debug_level > 0)
-            printf("Add input %s...\n", config.inputs[i]);
-
-          evdev_create(config.inputs[i], mappings, config.debug_level > 0);
-        }
-
-        udev_init(!inputAdded, mappings, config.debug_level > 0);
-        evdev_init();
-        rumble_handler = evdev_rumble;
-        #ifdef HAVE_LIBCEC
-        cec_init();
-        #endif /* HAVE_LIBCEC */
+    if (IS_EMBEDDED(system)) {
+      char* mapping_env = getenv("SDL_GAMECONTROLLERCONFIG");
+      if (config.mapping == NULL && mapping_env == NULL) {
+        fprintf(stderr, "Please specify mapping file as default mapping could not be found.\n");
+        exit(-1);
       }
-      #ifdef HAVE_SDL
-      else if (system == SDL) {
-        if (config.inputsCount > 0) {
-          fprintf(stderr, "You can't select input devices as SDL will automatically use all available controllers\n");
-          exit(-1);
-        }
 
-        sdlinput_init(config.mapping);
-        rumble_handler = sdlinput_rumble;
+      struct mapping* mappings = NULL;
+      if (config.mapping != NULL)
+        mappings = mapping_load(config.mapping, config.debug_level > 0);
+
+      if (mapping_env != NULL) {
+        struct mapping* map = mapping_parse(mapping_env);
+        map->next = mappings;
+        mappings = map;
       }
-      #endif
+
+      for (int i=0;i<config.inputsCount;i++) {
+        if (config.debug_level > 0)
+          printf("Add input %s...\n", config.inputs[i]);
+
+        evdev_create(config.inputs[i], mappings, config.debug_level > 0);
+      }
+
+      udev_init(!inputAdded, mappings, config.debug_level > 0);
+      evdev_init();
+      rumble_handler = evdev_rumble;
+      #ifdef HAVE_LIBCEC
+      cec_init();
+      #endif /* HAVE_LIBCEC */
     }
+    #ifdef HAVE_SDL
+    else if (system == SDL) {
+      if (config.inputsCount > 0) {
+        fprintf(stderr, "You can't select input devices as SDL will automatically use all available controllers\n");
+        exit(-1);
+      }
+
+      sdl_init(config.stream.width, config.stream.height, config.fullscreen);
+      sdlinput_init(config.mapping);
+      rumble_handler = sdlinput_rumble;
+    }
+    #endif
 
     stream(&server, &config, system);
   } else if (strcmp("pair", config.action) == 0) {
     char pin[5];
-    sprintf(pin, "%d%d%d%d", (int)random() % 10, (int)random() % 10, (int)random() % 10, (int)random() % 10);
-    printf("Please enter the following PIN on the target PC: %s\n", pin);
+    char buffer[10];
+    
+    /* KSM mod - don't randomize a pin, just get it from text file */
+    FILE* f = fopen("recent-code.txt", "r");
+    if (f != NULL)
+    {
+      fscanf(f, "%s", buffer);
+      fclose(f);
+
+      for (int i = 0; i < 4; i++) 
+        pin[i] = buffer[i];
+      pin[4] = 0; 
+    }
+    else
+    {
+      for (int i = 0; i < 4; i++) 
+        pin[i] = '1'+i;
+      pin[4] = 0;
+    }
+    /* end of mod */
+
     if (gs_pair(&server, &pin[0]) != GS_OK) {
       fprintf(stderr, "Failed to pair to server: %s\n", gs_error);
     } else {

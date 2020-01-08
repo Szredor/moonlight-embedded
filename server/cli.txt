@@ -1,0 +1,25 @@
+Choose action:
+0.  exit () - SU
+1.  login (login, pass)
+2.  logout (user id)
+3.  use g-domain (user id)
+4.  left g-domain (user id)
+5.  use w-domain user id)
+6.  left w-domain (user id)
+7.  register new user (login, pass)
+8.  users list ()
+9.  domains status list ()
+10. snooze server UI () - SU
+11. shutdown domain (name) - SU
+12. boot domain (name) - SU
+13. error (data)
+14. prompt (data)
+15. gaming domain info ()
+16. work domain info (user_id)
+17. work domain settings (user_id, tunnel_audio, *settings)
+18. server info ()
+19. timeout checking ()
+20. write in domain (data) - SLAVE 
+21. check gaming domain booted up () - SLAVE
+22. toggle slave visibility () - SLAVE
+23. pair NvGS (code)

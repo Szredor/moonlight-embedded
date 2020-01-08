@@ -1,0 +1,20 @@
+DONE
+1. Starting and shutting down domains with log in and out
+2. Creating new work domain with registration
+3. Database of users
+4. Logging module
+
+DONE BUT NOT TESTED
+1. Add asynchronous Shutdown function, becouse sometimes guests dont want to shut down
+
+DONE BUT NOT IMPLEMENTED
+1. IP communication with clients
+2. Create soft, which inserts 4-digit code to pair with Nvidia Gamestream Protocol
+
+NOT DONE
+1. Use QEMU-img utility instead of copying whole disk image.
+2. Create client app! (raspi only)
+3. Wait some time after a logout and then shutdown domains if its still necesary
+4. Add audio injection from work domain to gaming domain (for discord or music)
+5. Wake On LAN procedure
+6. Add search server procedure to slaves and clients

@@ -1,0 +1,31 @@
+DONE
+1. Starting and shutting down domains with log in and out
+2. Creating new work domain with registration
+3. Database of users
+4. Logging module
+5. Add asynchronous Shutdown functionsw, becouse sometimes guests dont want to shut down
+6. Use QEMU-img utility to do backing files instead of copying whole disk image
+7. IP communication on server
+8. Soft, which inserts 4-digit code to pair with Nvidia Gamestream Protocol
+9. Read config from file (server)
+
+DONE BUT NOT TESTED
+1. Raspi client
+
+DONE BUT NOT IMPLEMENTED
+
+
+NOT DONE
+DEBUG!DEBUG!DEBUG!
+1. Deamonize server soft <-----------------------
+2. Wait some time after a logout and then shutdown domains if its still necesary
+3. Add audio injection from work domain to gaming domain (for discord or music)
+4. Wake On LAN procedure
+5. Add search server procedure to slaves and clients <-
+6. Config files for client <---
+7. Nvidia Gamestream configuration on client <-----
+
+KNOWN BUGS
+
+1.When you try to pair client with guest windows machine and it hasn't been paired earlier it will time out.
+SOLUTION - Modify moonlight embedded to send a signal to client when the code is ready to read. Now it waits when moonlight embedded ends, but it wait for signal from windows guest.
